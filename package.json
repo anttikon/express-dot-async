@@ -1,7 +1,7 @@
 {
   "name": "express-dot-async",
   "version": "0.1.0",
-  "description": "Use Promises with Express",
+  "description": "Use Promises with Express like a boss!",
   "author": "Antti Kontoniemi",
   "main": "src/index.js",
   "repository": {
