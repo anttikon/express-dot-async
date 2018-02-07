@@ -19,6 +19,15 @@ module.exports = function (app) {
   }
 }
 
+function handleResponse(data, res) {
+  if (!data) {
+    return res.send("")
+  } else if (typeof data === 'object') {
+    return res.json(data)
+  }
+  return res.send(data)
+}
+
 function wrap(fn) {
   return (req, res, next) => {
     try {
@@ -30,10 +39,10 @@ function wrap(fn) {
         return next()
       } else if (routeReturnPromise) {
         return routeFunction
-          .then(result => (result ? res.json(result) : res.send()))
+          .then(result => handleResponse(result, res))
           .catch((err) => catchError(err, res))
       } else {
-        return routeFunction ? res.json(routeFunction) : res.send()
+        return handleResponse(routeFunction, res)
       }
     } catch (err) {
       catchError(err, res)
