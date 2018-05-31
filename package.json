@@ -1,9 +1,12 @@
 {
   "name": "express-dot-async",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Use Promises with Express like a boss!",
   "author": "Antti Kontoniemi",
   "main": "src/index.js",
+  "scripts": {
+    "test": "jest --forceExit"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/anttikon/express-dot-async"
@@ -12,5 +15,11 @@
     "express",
     "promise"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "express": "^4.16.3",
+    "jest": "^23.0.0-alpha.0",
+    "supertest": "^3.0.0"
+  }
 }
