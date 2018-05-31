@@ -40,20 +40,24 @@ function wrap(fn) {
       } else if (routeReturnPromise) {
         return routeFunction
           .then(result => handleResponse(result, res))
-          .catch((err) => catchError(err, res))
+          .catch((err) => catchError(err, res, next))
       } else {
         return handleResponse(routeFunction, res)
       }
     } catch (err) {
-      catchError(err, res)
+      catchError(err, res, next)
     }
   }
 }
 
-function catchError(err, res) {
-  const status = err.status ? err.status : 500
-  const message = err.message || 'Error'
-  res.status(status).send(message)
+function catchError(err, res, next) {
+  if (err.status) {
+    const status = err.status ? err.status : 500
+    const message = err.message || 'Error'
+    res.status(status).send(message)
+  } else {
+    next(err)
+  }
 }
 
 module.exports.HttpError = class HttpError extends Error {
